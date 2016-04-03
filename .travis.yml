@@ -23,8 +23,11 @@ before_script:
   - travis_retry composer self-update
   - travis_retry composer update --prefer-dist
   - if [ -n "$PROCESS_CODECLIMATE" ];then echo 'zend_extension=xdebug.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini; fi
-  - nvm install 4.2 && nvm use 4.2
+  - nvm install 4.2.4 && nvm use 4.2.4
+  - export NODE_PATH=/home/travis/.nvm/v4.2.4/lib/node_modules
   - npm install -g spidy@2
+  - node -v
+  - spidyjs -v
 
 script: ./test/bin/ci.bash summary
 
