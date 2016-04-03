@@ -1,0 +1,32 @@
+language: php
+
+sudo: false
+
+matrix:
+  include:
+  - php: 5.5
+    env: PROCESS_CODECLIMATE=true
+  - php: 5.6
+  - php: 7.0
+  - php: nightly
+  - php: hhvm
+    env: IGNORE_XDEBUG=true
+
+  fast_finish: true
+
+  allow_failures:
+  - php: nightly
+
+before_script:
+  - if [ -z "$IGNORE_XDEBUG" ];then phpenv config-rm xdebug.ini; fi
+  - composer config -g github-oauth.github.com $GITHUB_COMPOSER_AUTH
+  - travis_retry composer self-update
+  - travis_retry composer update --prefer-dist
+  - if [ -n "$PROCESS_CODECLIMATE" ];then echo 'zend_extension=xdebug.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini; fi
+
+script: ./test/bin/ci.bash summary
+
+cache:
+  directories:
+    - vendor
+    - $HOME/.composer/cache
