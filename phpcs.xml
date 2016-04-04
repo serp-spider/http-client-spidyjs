@@ -19,7 +19,7 @@
     <rule ref="PEAR.Functions.ValidDefaultValue.NotAtEnd">
         <exclude-pattern>./test/*</exclude-pattern>
     </rule>
-    
+
     <!-- By default we use single quote only. Double quotes come when a variable is inside -->
     <rule ref="Squiz.Strings.DoubleQuoteUsage">
         <exclude name="Squiz.Strings.DoubleQuoteUsage.ContainsVar"/>

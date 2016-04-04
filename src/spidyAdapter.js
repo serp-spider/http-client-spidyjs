@@ -49,7 +49,7 @@ var proxy = inputData.proxy || null;
 var settings = {
     method: method,
     headers: headers,
-    data: data,
+    body: data,
     proxy: proxy
 };
 
@@ -76,7 +76,6 @@ spidy.request(url, settings, function (err, window, response) {
         console.error('Error: could not fetch the page for the url: "' + url + '". Reason: ' + err);
         process.exit(1);
     } else {
-
         // TODO: patch spidy to allow access to request data
         //var headers = {};
         //for (var i=0; i<pageHeaders.length; i++) {
