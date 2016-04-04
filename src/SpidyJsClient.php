@@ -47,8 +47,8 @@ class SpidyJsClient implements HttpClientInterface
             $proxyString = $proxy->getIp() . ':' . $proxy->getPort();
             // TODO: proxy auth
 
-            if(null ==$proxy->getScheme()){
-                $proxy = 'http://' . $proxyString;
+            if (null == $proxy->getScheme()) {
+                $proxyString = 'http://' . $proxyString;
             }
 
             $commandArg['proxy'] = $proxyString;

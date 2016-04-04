@@ -32,9 +32,16 @@ if (!inputData.url) {
 
 var url = inputData.url;
 var method = inputData.method || "GET";
-var headers = inputData.headers || {};
+var headers = {};
 var data = inputData.data || null;
 var proxy = inputData.proxy || null;
+
+if (inputData.headers && typeof inputData.headers == "object") {
+    for (var i in inputData.headers) {
+        headers[i.toLocaleLowerCase()] = inputData.headers[i];
+    }
+}
+
 //
 //
 // PARSE THE INPUT /////////////////////
@@ -56,13 +63,13 @@ var settings = {
 // TODO: viewport size (jsdom needs a patch)
 // viewportsize = inputData.viewportsize || {width: 1680, height: 1050};
 
-if (headers['User-Agent']) {
-    settings.userAgent = headers['User-Agent'];
+if (headers['user-agent']) {
+    settings.userAgent = headers['user-agent'];
 }
 
 
-if (!headers['Accept']) {
-    headers['Accept'] = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+if (!headers['accept']) {
+    headers['accept'] = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
 }
 //
 //
