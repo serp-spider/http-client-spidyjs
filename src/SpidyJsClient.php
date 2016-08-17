@@ -30,7 +30,7 @@ class SpidyJsClient implements HttpClientInterface
         ProxyInterface $proxy = null,
         CookieJarInterface $cookieJar = null
     ) {
-    
+
         $commandOptions = [];
 
 
@@ -44,10 +44,12 @@ class SpidyJsClient implements HttpClientInterface
         ];
 
         if ($proxy) {
-            $proxyString = $proxy->getIp() . ':' . $proxy->getPort();
+            $proxyString = $proxy->getHost() . ':' . $proxy->getPort();
             // TODO: proxy auth
 
-            if (null == $proxy->getScheme()) {
+            if ($proxyType = $proxy->getType()) {
+                $proxyString = $proxyType . '://' . $proxyString;
+            } else {
                 $proxyString = 'http://' . $proxyString;
             }
 
@@ -91,6 +93,5 @@ class SpidyJsClient implements HttpClientInterface
         );
 
         return $response;
-
     }
 }

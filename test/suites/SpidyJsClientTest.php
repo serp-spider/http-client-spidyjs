@@ -32,4 +32,14 @@ class SpidyJsClientTest extends HttpClientTestsCase
     {
         $this->markTestSkipped('Cookies not supported');
     }
+
+    public function testSocks4Proxy()
+    {
+        $this->markTestSkipped('socks4 proxy not supported');
+    }
+
+    public function testSocks5Proxy()
+    {
+        $this->markTestSkipped('socks5 proxy not supported');
+    }
 }
